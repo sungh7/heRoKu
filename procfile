@@ -1,0 +1,1 @@
+web: gunicorn pdlheroku.wsgi --log-file -
