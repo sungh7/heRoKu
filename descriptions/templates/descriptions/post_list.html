@@ -1,0 +1,62 @@
+{% extends 'descriptions/base.html' %}
+
+{% block content %}
+
+    <div class="post">
+        <h2>Waht is Heroku?</h2>
+        <li>Heroku is a platform as a service based on a managed container system, with integrated data services and a powerful ecosystem, for deploying and running modern apps.</li> <br>
+        <li>container system : Container system play a similar role to virtual machines, as they share the kernel of the host operating and provide user space isolation. services running in each container use resources that are assigned to just that container.</li>
+    </div>
+
+    <div class="post">
+        <h2>Setup</h2><br>
+        <ol>
+            <li>Setting.py 수정
+                <ul><br>
+                    <li>DEBUG - local에서 에러를 알려주던 DEBUG기능을 꺼야한다.</li><br>
+                    <li>SECRET_KEY - CRSF 보안 등을 위해 사용되는 랜덤 값, 웹서비스 시 숨겨줘야한다.</li>
+                </ul>
+            </li><br>
+            <li>Heroku 설치하기
+                <ul><br>
+                    <li>$ wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh</li>
+                </ul>
+            </li><br>
+            <li>Unicorn 설치하기
+                <ul><br>
+                    <li>gunicorn은 더 강력한 버전의 runserver</li><br>
+                    <li>$ pip install gunicorn</li>
+                </ul>
+            </li><br>
+            <li>Procfile 작성
+                <ul><br>
+                    web: gunicorn secondproject.wsgi --log-file -
+                </ul>
+            </li><br>
+            <li>Database 설정하기
+                <ul><br>
+                    <li>local에서는 sqlite가 기본으로 설정되어 있지만 heroku에서는 사용할 수 없다.</li><br>
+                    <li>heroku에서는 postgresql를 기본 옵션으로 설정해뒀기 때문에 몇몇 패키지를 설치해야한다.</li><br>
+                    <li>$ pip install dj-database-url </li>
+                    <li>$ pip install psycopg2-binary</li>
+                </ul>
+            </li><br>
+            <li>정적 파일을 위한 설정
+                <ul><br>
+                    <li>$ pip install whitenoise</li><br>
+                    <li>django에서 debug를 false로 잡게 되면은 기존에 static 파일들의 경로를 못찾게 되는데 WhiteNoise를 설치하면 static파일들을 collectstatics 명령 수행시 지정경로에 파일들을 모아주는 역할을 한다.
+                    </li>
+                </ul>
+            </li><br>
+            <li>Heroku 실행
+                <ul>
+                    <li>requirements.txt</li>
+                    <li>.gitignore</li>
+                    <li>runtime.txt</li>
+                </ul>
+            </li>
+        </ol>
+    </div>
+
+
+{% endblock %}
